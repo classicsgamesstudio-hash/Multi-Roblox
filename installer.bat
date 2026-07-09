@@ -4,8 +4,6 @@ chcp 65001 >nul
 set "CURRENT_VERSION=0.0.2"
 title MultiRoblox Installer
 
-if "%1"=="/silent" goto INSTALL
-
 if exist "MultiRoblox.exe" (
     if not exist "Service.bat" (
         goto REPAIR_REQUEST
@@ -16,6 +14,7 @@ if exist "MultiRoblox.exe" (
 goto START
 
 :REPAIR_REQUEST
+if "%1"=="/silent" goto INSTALL
 cls
 echo ===================================================
 echo               MultiRoblox Repair Tool
@@ -38,6 +37,7 @@ echo.
 goto GENERATE_SERVICE
 
 :REINSTALL_REQUEST
+if "%1"=="/silent" goto INSTALL
 cls
 echo ===================================================
 echo               MultiRoblox Installer
@@ -52,6 +52,7 @@ if /i "%reinstallResult%"=="N" goto CANCEL
 goto REINSTALL_REQUEST
 
 :START
+if "%1"=="/silent" goto INSTALL
 cls
 echo ===================================================
 echo               MultiRoblox Installer
