@@ -52,7 +52,6 @@ if /i "%reinstallResult%"=="N" goto CANCEL
 goto REINSTALL_REQUEST
 
 :START
-if "%1"=="/silent" goto INSTALL
 cls
 echo ===================================================
 echo               MultiRoblox Installer
@@ -175,7 +174,6 @@ echo.
 goto GENERATE_SERVICE
 
 :SHORTCUT_REQUEST
-if "%1"=="/silent" goto CREATE_SHORTCUT
 echo.
 set /p shortcutChoice="Do you want to create a Service.bat shortcut on your Desktop? (Y/N): "
 
