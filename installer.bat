@@ -305,10 +305,12 @@ echo @echo off > Service.bat
     echo echo ===================================================
     echo echo.
     echo echo Updating MultiRoblox to version %%LATEST_VERSION%%...
+    echo taskkill /f /im "MultiRoblox.exe" 2^>nul
     echo curl -s "https://raw.githubusercontent.com/classicsgamesstudio-hash/Multi-Roblox/refs/heads/main/installer.bat" ^> "%%~dp0installer_new.bat"
+    echo powershell Unblock-File -Path "%%~dp0installer_new.bat" 2^>nul
     echo if exist "%%~dp0installer_new.bat" ^(
-    echo    taskkill /f /im "MultiRoblox.exe" 2^>nul
-    echo    start "" "%%~dp0installer_new.bat" /updatemode
+    echo     cmd /c ""%%~dp0installer_new.bat" /updatemode"
+    echo     del "%%~dp0installer_new.bat" 2^>nul
     echo    exit
     echo ^) else ^(
     echo   echo [ERROR] Failed to download the latest installer. Please check your internet connection and try again.
