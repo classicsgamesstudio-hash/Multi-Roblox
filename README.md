@@ -1,4 +1,4 @@
-# Multi Roblox
+# Multi Roblox (In Dev)
 **Multi Roblox** is a lightweight, autonomous tool designed to launch multiple instances of Roblox on a single machine.<br> The entire project — including the C# core source code, custom application icon, and management logic — is packed into a single file.
 
 🚀 **Quick Start**
