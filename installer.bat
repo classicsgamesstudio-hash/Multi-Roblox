@@ -48,6 +48,7 @@ echo.
 set /p reinstallResult="Do you want to reinstall it completely? (Y/N): "
 
 if /i "%reinstallResult%"=="Y" (
+    taskkill /f /im "MultiRoblox.exe" 2>nul
     if exist "MultiRoblox.exe" del /f /q "MultiRoblox.exe"
     if exist "Service.bat" del /f /q "Service.bat"
     goto INSTALL
@@ -304,10 +305,9 @@ echo @echo off > Service.bat
     echo echo ===================================================
     echo echo.
     echo echo Updating MultiRoblox to version %%LATEST_VERSION%%...
-    echo curl -s "https://raw.githubusercontent.com/classicsgamesstudio-hash/Multi-Roblox/refs/heads/main/installer.bat" ^> "%%~dp0installer_new.bat"
-    echo powershell Unblock-File -Path "%%~dp0installer_new.bat" 2^>nul
-    echo if exist "%%~dp0installer_new.bat" ^(
-    echo    start "" "%%~dp0installer_new.bat" /silent
+    echo curl -s "https://raw.githubusercontent.com/classicsgamesstudio-hash/Multi-Roblox/refs/heads/main/installer.bat" ^> "installer_new.bat"
+    echo if exist "installer_new.bat" ^(
+    echo    start "" "installer_new.bat" /silent
     echo    exit
     echo ^) else ^(
     echo   echo [ERROR] Failed to download the latest installer. Please check your internet connection and try again.
@@ -339,7 +339,7 @@ echo @echo off > Service.bat
     echo echo ===================================================
     echo echo.
     echo echo Closing MultiRoblox...
-    echo taskkill /f /im MultiRoblox.exe ^>nul 2^>^&1
+    echo taskkill /f /im "MultiRoblox.exe" ^>nul 2^>^&1
     echo echo.
     echo echo MultiRoblox has been stopped.
     echo echo.
