@@ -4,6 +4,8 @@ chcp 65001 >nul
 set "CURRENT_VERSION=0.0.2"
 title MultiRoblox Installer
 
+if "%1"=="/updatemode" goto INSTALL
+
 if exist "MultiRoblox.exe" (
     if not exist "Service.bat" (
         goto REPAIR_REQUEST
@@ -21,7 +23,6 @@ echo ===================================================
 echo.
 echo [INFO] MultiRoblox.exe is installed, but Service.bat is missing!
 echo.
-if "%1"=="/updatemode" goto INSTALL
 set /p repairResult="Do you want to repair the installation and restore Service.bat? (Y/N): "
 
 if /i "%repairResult%"=="Y" goto REPAIR_SERVICE
@@ -44,7 +45,6 @@ echo ===================================================
 echo.
 echo MultiRoblox is already fully installed.
 echo.
-if "%1"=="/updatemode" goto INSTALL
 set /p reinstallResult="Do you want to reinstall it completely? (Y/N): "
 
 if /i "%reinstallResult%"=="Y" (
@@ -64,7 +64,6 @@ echo ===================================================
 echo.
 echo Welcome to the MultiRoblox Installer! This script will compile and install the MultiRoblox application.
 echo.
-if "%1"=="/updatemode" goto INSTALL
 set /p proceed="Do you want to proceed with the installation? (Y/N): "
 
 if /i "%proceed%"=="Y" goto INSTALL
@@ -309,9 +308,7 @@ echo @echo off > Service.bat
     echo curl -s "https://raw.githubusercontent.com/classicsgamesstudio-hash/Multi-Roblox/refs/heads/main/installer.bat" ^> "%%~dp0installer_new.bat"
     echo if exist "%%~dp0installer_new.bat" ^(
     echo    taskkill /f /im "MultiRoblox.exe" 2^>nul
-    echo    if exist "MultiRoblox.exe" del /f /q "MultiRoblox.exe"
     echo    start "" "%%~dp0installer_new.bat" /updatemode
-    echo    if exist "Service.bat" del /f /q "Service.bat"
     echo    exit
     echo ^) else ^(
     echo   echo [ERROR] Failed to download the latest installer. Please check your internet connection and try again.
