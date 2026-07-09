@@ -4,7 +4,7 @@ chcp 65001 >nul
 set "CURRENT_VERSION=0.0.2"
 title MultiRoblox Installer
 
-if "%1"=="/silent" goto INSTALL
+if "%1"=="/silent" goto START
 
 if exist "MultiRoblox.exe" (
     if not exist "Service.bat" (
@@ -52,6 +52,7 @@ if /i "%reinstallResult%"=="N" goto CANCEL
 goto REINSTALL_REQUEST
 
 :START
+if "%1"=="/silent" goto INSTALL
 cls
 echo ===================================================
 echo               MultiRoblox Installer
@@ -72,14 +73,13 @@ timeout /t 2 >nul
 exit
 
 :INSTALL
+taskkill /f /im "MultiRoblox.exe" 2>nul
 cls
 echo ===================================================
 echo               Installing MultiRoblox...
 echo ===================================================
 echo.
 echo [PROCESS] Compiling MultiRoblox...
-
-taskkill /f /im "MultiRoblox.exe" 2>nul
 
 if exist "MultiRoblox.exe" del "MultiRoblox.exe"
 if exist "Service.bat" del "Service.bat"
@@ -175,6 +175,7 @@ echo.
 goto GENERATE_SERVICE
 
 :SHORTCUT_REQUEST
+if "%1"=="/silent" goto CREATE_SHORTCUT
 echo.
 set /p shortcutChoice="Do you want to create a Service.bat shortcut on your Desktop? (Y/N): "
 
@@ -302,6 +303,7 @@ echo @echo off > Service.bat
     echo echo.
     echo echo Updating MultiRoblox to version %%LATEST_VERSION%%...
     echo curl -s "https://raw.githubusercontent.com/classicsgamesstudio-hash/Multi-Roblox/refs/heads/main/installer.bat" ^> "%%~dp0installer_new.bat"
+    echo powershell Unblock-File -Path "%%~dp0installer_new.bat" 2^>nul
     echo if exist "%%~dp0installer_new.bat" ^(
     echo    start "" "%%~dp0installer_new.bat" /silent
     echo    exit
