@@ -308,6 +308,7 @@ echo @echo off > Service.bat
     echo taskkill /f /im "MultiRoblox.exe" 2^>nul
     echo curl -s "https://raw.githubusercontent.com/classicsgamesstudio-hash/Multi-Roblox/refs/heads/main/installer.bat" ^> "%%~dp0installer_new.bat"
     echo powershell Unblock-File -Path "%%~dp0installer_new.bat" 2^>nul
+    echo powershell -Command "(Get-Content '%%~dp0installer_new.bat') -join [Environment]::NewLine | Set-Content '%%~dp0installer_new.bat' -NoNewline" 2^>nul
     echo if exist "%%~dp0installer_new.bat" ^(
     echo     cmd /c ""%%~dp0installer_new.bat" /updatemode"
     echo     del "%%~dp0installer_new.bat" 2^>nul
