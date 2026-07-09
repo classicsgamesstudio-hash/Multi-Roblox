@@ -3,6 +3,7 @@ cd /d "%~dp0"
 chcp 65001 >nul
 set "CURRENT_VERSION=0.0.2"
 title MultiRoblox Installer
+
 if "%1"=="/silent" goto INSTALL
 
 if exist "MultiRoblox.exe" (
@@ -297,7 +298,6 @@ echo @echo off > Service.bat
     echo echo ===================================================
     echo echo.
     echo echo Updating MultiRoblox to version %%LATEST_VERSION%%...
-    echo taskkill /f /im "MultiRoblox.exe" 2^>nul
     echo curl -s "https://raw.githubusercontent.com/classicsgamesstudio-hash/Multi-Roblox/refs/heads/main/installer.bat" ^> "%%~dp0installer_new.bat"
     echo if exist "%%~dp0installer_new.bat" ^(
     echo    start "" "%%~dp0installer_new.bat" /silent
