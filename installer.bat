@@ -4,7 +4,7 @@ chcp 65001 >nul
 set "CURRENT_VERSION=0.0.2"
 title MultiRoblox Installer
 
-if "%1"=="/silent" goto INSTALL
+if "%1"=="/updatemode" goto INSTALL
 
 if exist "MultiRoblox.exe" (
     if not exist "Service.bat" (
@@ -307,7 +307,7 @@ echo @echo off > Service.bat
     echo echo Updating MultiRoblox to version %%LATEST_VERSION%%...
     echo curl -s "https://raw.githubusercontent.com/classicsgamesstudio-hash/Multi-Roblox/refs/heads/main/installer.bat" ^> "installer_new.bat"
     echo if exist "installer_new.bat" ^(
-    echo    start "" "installer_new.bat" /silent
+    echo    start "" "installer_new.bat" /updatemode
     echo    exit
     echo ^) else ^(
     echo   echo [ERROR] Failed to download the latest installer. Please check your internet connection and try again.
