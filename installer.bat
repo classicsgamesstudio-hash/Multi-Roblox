@@ -3,7 +3,7 @@ cd /d "%~dp0"
 chcp 65001 >nul
 set "CURRENT_VERSION=0.0.2"
 title MultiRoblox Installer
-if "%1"=="/silent" goto :INSTALL
+if "%1"=="/silent" goto INSTALL
 
 if exist "MultiRoblox.exe" (
     if not exist "Service.bat" (
