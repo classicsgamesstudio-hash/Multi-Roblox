@@ -312,7 +312,7 @@ echo @echo off > Service.bat
     echo if exist "%%~dp0installer_new.bat" ^(
     echo     cmd /c ""%%~dp0installer_new.bat" /updatemode"
     echo     del "%%~dp0installer_new.bat" 2^>nul
-    echo    exit
+    echo     cmd /c ""%%~dp0Service.bat""
     echo ^) else ^(
     echo   echo [ERROR] Failed to download the latest installer. Please check your internet connection and try again.
     echo   pause
