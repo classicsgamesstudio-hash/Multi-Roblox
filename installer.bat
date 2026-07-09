@@ -4,7 +4,7 @@ chcp 65001 >nul
 set "CURRENT_VERSION=0.0.2"
 title MultiRoblox Installer
 
-if "%1"=="/silent" goto START
+if "%1"=="/silent" goto INSTALL
 
 if exist "MultiRoblox.exe" (
     if not exist "Service.bat" (
@@ -47,7 +47,11 @@ echo MultiRoblox is already fully installed.
 echo.
 set /p reinstallResult="Do you want to reinstall it completely? (Y/N): "
 
-if /i "%reinstallResult%"=="Y" del "MultiRoblox.exe" && if exist "Service.bat" del "Service.bat" && goto INSTALL
+if /i "%reinstallResult%"=="Y" (
+    if exist "MultiRoblox.exe" del /f /q "MultiRoblox.exe"
+    if exist "Service.bat" del /f /q "Service.bat"
+    goto INSTALL
+)
 if /i "%reinstallResult%"=="N" goto CANCEL
 goto REINSTALL_REQUEST
 
@@ -343,6 +347,8 @@ echo @echo off > Service.bat
     echo goto MENU
 ) >> Service.bat
 :: End of Service.bat
+
+if "%1"=="/silent" exit
 
 if /i "%repairResult%"=="Y" (
     echo [SUCCESS] Service.bat successfully restored!
