@@ -352,7 +352,7 @@ echo @echo off > Service.bat
 ) >> Service.bat
 :: End of Service.bat
 
-if "%1"=="/silent" exit
+if "%1"=="/updatemode" exit
 
 if /i "%repairResult%"=="Y" (
     echo [SUCCESS] Service.bat successfully restored!
