@@ -306,9 +306,11 @@ echo @echo off > Service.bat
     echo echo.
     echo echo Updating MultiRoblox to version %%LATEST_VERSION%%...
     echo taskkill /f /im "MultiRoblox.exe" 2^>nul
+    
     echo curl -s "https://raw.githubusercontent.com/classicsgamesstudio-hash/Multi-Roblox/refs/heads/main/installer.bat" ^> "%%~dp0installer_new.bat"
-    echo powershell Unblock-File -Path "%%~dp0installer_new.bat" 2^>nul
+    
     echo powershell -Command "(Get-Content '%%~dp0installer_new.bat') -join [Environment]::NewLine | Set-Content '%%~dp0installer_new.bat' -NoNewline" 2^>nul
+    
     echo if exist "%%~dp0installer_new.bat" ^(
     echo     cmd /c ""%%~dp0installer_new.bat" /updatemode"
     echo     del "%%~dp0installer_new.bat" 2^>nul
@@ -349,6 +351,48 @@ echo @echo off > Service.bat
     echo echo.
     echo pause
     echo goto MENU
+
+    echo :MISSING_MULTIROBLOX
+    echo cls
+    echo echo ===================================================
+    echo echo                 MultiRoblox Service
+    echo echo ===================================================
+    echo echo.
+    echo echo [ERROR] MultiRoblox.exe is missing!
+    echo echo.
+    echo echo [1] Reinstall MultiRoblox
+    echo echo [2] Exit
+    echo echo ===================================================
+    echo set "choiceREC=0"
+    echo set /p choiceREC="Choose an option (1-2): "
+    echo if "%%choiceREC%%"=="1" goto REINSTALL_PROG
+    echo if "%%choiceREC%%"=="2" exit
+    echo goto MISSING_MULTIROBLOX
+
+    echo :REINSTALL_PROG
+    echo cls
+    echo echo ===================================================
+    echo echo                 MultiRoblox Service
+    echo echo ===================================================
+    echo echo.
+    echo echo [PROCESS] Starting to Reinstall MultiRoblox...
+    echo echo.
+
+    echo curl -s -L -o "%%~dp0installer_recover.bat" "https://github.com/classicsgamesstudio-hash/Multi-Roblox/releases/download/v%%VERSION%%/installer.bat"
+    
+    echo powershell -Command "(Get-Content '%%~dp0installer_recover.bat') -join [Environment]::NewLine | Set-Content '%%~dp0installer_recover.bat' -NoNewline" 2^>nul
+
+    echo if exist "%%~dp0installer_recover.bat" ^(
+    echo     echo [PROCESS] Reinstalling MultiRoblox... 
+    echo     cmd /c ""%%~dp0installer_recover.bat" /updatemode"
+    echo     del "%%~dp0installer_recover.bat" 2^>nul
+    echo     cmd /c ""%%~dp0Service.bat""
+    echo ^) else ^(
+    echo     echo [ERROR] Failed to download recovery installer. Please check your internet connection and try again.
+    echo     pause
+    echo     exit
+    echo ^)
+
 ) >> Service.bat
 :: End of Service.bat
 
