@@ -230,6 +230,7 @@ echo @echo off > Service.bat
     echo del "%%temp%%\latest_version.txt"
 
     echo :MENU
+    if not exist "MultiRoblox.exe" goto MISSING_MULTIROBLOX
     echo cls
     echo echo ===================================================
     echo echo                 MultiRoblox Service
@@ -260,6 +261,7 @@ echo @echo off > Service.bat
     echo goto MENU
 
     echo :UPDATE_CHECK
+    if not exist "MultiRoblox.exe" goto MISSING_MULTIROBLOX
     echo cls
     echo echo ===================================================
     echo echo                 MultiRoblox Service
@@ -287,6 +289,7 @@ echo @echo off > Service.bat
     echo goto UPDATE_CHECK
 
     echo :ALREADY_UP_TO_DATE
+    if not exist "MultiRoblox.exe" goto MISSING_MULTIROBLOX
     echo cls
     echo echo ===================================================
     echo echo                MultiRoblox Service
@@ -322,6 +325,7 @@ echo @echo off > Service.bat
     echo ^)
 
     echo :START_PROG
+    if not exist "MultiRoblox.exe" goto MISSING_MULTIROBLOX
     echo cls
     echo echo ===================================================
     echo echo                 MultiRoblox Service
@@ -339,6 +343,7 @@ echo @echo off > Service.bat
     echo goto MENU
 
     echo :STOP_PROG
+    if not exist "MultiRoblox.exe" goto MISSING_MULTIROBLOX
     echo cls
     echo echo ===================================================
     echo echo                 MultiRoblox Service
