@@ -230,12 +230,12 @@ echo @echo off > Service.bat
     echo del "%%temp%%\latest_version.txt"
 
     echo :MENU
-    if not exist "MultiRoblox.exe" goto MISSING_MULTIROBLOX
     echo cls
     echo echo ===================================================
     echo echo                 MultiRoblox Service
     echo echo ===================================================
     echo echo.
+    if not exist "MultiRoblox.exe" goto MISSING_MULTIROBLOX
     echo tasklist /fi "imagename eq MultiRoblox.exe" 2^>nul ^| find /i "MultiRoblox.exe" ^>nul
     echo if errorlevel 1 ^(
     echo     echo STATUS: [ MultiRoblox is NOT RUNNING ] 🔴
@@ -261,12 +261,12 @@ echo @echo off > Service.bat
     echo goto MENU
 
     echo :UPDATE_CHECK
-    if not exist "MultiRoblox.exe" goto MISSING_MULTIROBLOX
     echo cls
     echo echo ===================================================
     echo echo                 MultiRoblox Service
     echo echo ===================================================
     echo echo.
+    if not exist "MultiRoblox.exe" goto MISSING_MULTIROBLOX
     echo if "%%VERSION%%"=="%%LATEST_VERSION%%" ^(
     echo     echo [ MultiRoblox is Up-to-Date ] 🟢
     echo ^) else ^(
@@ -289,12 +289,12 @@ echo @echo off > Service.bat
     echo goto UPDATE_CHECK
 
     echo :ALREADY_UP_TO_DATE
-    if not exist "MultiRoblox.exe" goto MISSING_MULTIROBLOX
     echo cls
     echo echo ===================================================
     echo echo                MultiRoblox Service
     echo echo ===================================================
     echo echo.
+    if not exist "MultiRoblox.exe" goto MISSING_MULTIROBLOX
     echo echo MultiRoblox is Up-to-Date. No updates are required.
     echo echo MultiRoblox version: %%VERSION%%
     echo echo.
@@ -325,13 +325,13 @@ echo @echo off > Service.bat
     echo ^)
 
     echo :START_PROG
-    if not exist "MultiRoblox.exe" goto MISSING_MULTIROBLOX
     echo cls
     echo echo ===================================================
     echo echo                 MultiRoblox Service
     echo echo ===================================================
     echo echo.
     echo echo Launching MultiRoblox in background...
+    if not exist "MultiRoblox.exe" goto MISSING_MULTIROBLOX
     echo echo Set WshShell = CreateObject^("WScript.Shell"^) ^> temp_start.vbs
     echo echo WshShell.Run "MultiRoblox.exe hidden", 0, false ^>^> temp_start.vbs
     echo wscript.exe temp_start.vbs
@@ -343,13 +343,13 @@ echo @echo off > Service.bat
     echo goto MENU
 
     echo :STOP_PROG
-    if not exist "MultiRoblox.exe" goto MISSING_MULTIROBLOX
     echo cls
     echo echo ===================================================
     echo echo                 MultiRoblox Service
     echo echo ===================================================
     echo echo.
     echo echo Closing MultiRoblox...
+    if not exist "MultiRoblox.exe" goto MISSING_MULTIROBLOX
     echo taskkill /f /im "MultiRoblox.exe" ^>nul 2^>^&1
     echo echo.
     echo echo MultiRoblox has been stopped.
